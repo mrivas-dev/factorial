@@ -131,7 +131,7 @@ This document outlines the architecture and key design decisions for an e-commer
         }
     ```
      <!-- Where ”frame_1_mate”, “rim_1” aare IDs for the parts -->
-*   
+
 ## Administrative workflows:  
 * **Managing inventory**  
     Marcus logs into the admin dashboard and:  
@@ -174,7 +174,7 @@ After creating a new product the database will persist this information on the p
         incompatibility_list: List of tags that are incompatible with this part  
         image: link to the URL where the image is for this part  
         ```
-    * So, to introduce a new rim color for eg., Red Rim 17 inch, the completed information payload that goes into the API would look something like this:  
+    * In order to introduce a new rim color for eg., Red Rim 17 inch, the completed information payload that goes into the API would look something like this:  
         * name: “Red Rim 17 inch”  
         * stock\_status: 1  
         * group: “Rims”  
@@ -182,45 +182,48 @@ After creating a new product the database will persist this information on the p
         * tags: RIMS  
         * incompatibility\_list: BMX  
         * image: /path/to/image  
-19. Setting prices:  
-    * To change the Price of a part or Product, Marcus will access the Part detail page or Product detail page and update it.  
-      To cover for example the **Bike Matte Finish** vs the **Frame Matte Finish** restriction, as I mentioned before we are going to treat them as different customizations or parts, so it will be a **Bike Matte Finish** with a particular price and a **Frame Matte Finish** with a different price.  
-    * Regarding the database changes, the only change that will be impacted will be the price for each part.  
-20. Tags:  
-    * We would need a UI to cover the creation/modification of tags.  
-    * For creating the TAG the only thing we need is a simple UI to add them and drag and drop them to set the order.  
-    * To add them the only thing we are going to require is the name and the description could be an optional field.
+## Setting prices:  
+* To change the Price of a part or Product, Marcus will access the Part detail page or Product detail page and update it.  
+    To cover for example the **Bike Matte Finish** vs the **Frame Matte Finish** restriction, as I mentioned before we are going to treat them as different customizations or parts, so it will be a **Bike Matte Finish** with a particular price and a **Frame Matte Finish** with a different price.  
+* Regarding the database changes, the only change that will be impacted will be the price for each part.  
+## Tags:  
+* We would need a UI to cover the creation/modification of tags.  
+* For creating the TAG the only thing we need is a simple UI to add them and drag and drop them to set the order.  
+* To add them the only thing we are going to require is the name and the description could be an optional field.
 
-API Design
+## API Design
 
 Endpoints
 
 **Product Management**
-
-* GET /products \- Fetch all products  
-* GET /products/{id} \- Fetch a single product  
-* POST /products \- Create a new product  
-* PATCH /products/{id} \- Update product details
+```
+GET /products \- Fetch all products  
+GET /products/{id} \- Fetch a single product  
+POST /products \- Create a new product  
+PATCH /products/{id} \- Update product details
+```
 
 **Parts & Cart**
-
-* GET /parts \- Get available parts ?  
-* POST /cart/ \- Create new cart  
-* POST /cart/{id} \- Update cart  
-* GET /cart/{id} \- Retrieve cart details
-
+```
+GET /parts/{id} \- Fetch a single part ? 
+GET /parts \- Get available parts ?  
+POST /cart/ \- Create new cart  
+POST /cart/{id} \- Update cart  
+GET /cart/{id} \- Retrieve cart details
+```
 **Orders**
-
-* POST /orders \- Place an order  
-* GET /orders/{id} \- Fetch order details
-
+```
+POST /orders \- Place an order  
+GET /orders/{id} \- Fetch order details
+```
 **Admin Management**
+```
+POST /admin/tags \- Add/update tags 
+POST /admin/products \- Add/update products 
+POST /admin/parts \- Manage part inventory
+```
 
-* POST /admin/products \- Add/update products  
-* POST /admin/parts \- Manage part inventory
-
-Future Enhancements ?
-
+## Future Enhancements
 * Implement multi-category support for skis, surfboards, etc.  
 * Add discount codes and promotions.  
 * Enhance search and filtering for products.  
