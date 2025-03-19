@@ -90,6 +90,8 @@ This document outlines the architecture and key design decisions for an e-commer
             * Update the price after each part is selected or changed  
             * Add to Cart or Buy now option  
             * Two buttons easy to see and click or press, one main one with the primary colors of the theme for the website (BUY button) and anotherone for adding to cart with the secondary color as border color  
+    * Mock up for the product page
+    ![](https://github.com/user-attachments/assets/a0d3fd07-fe8f-4a47-9ab7-b8501f5bd6e4)
 * **Calculate availability**  
     * To do so, when loading the product detail page we would call `GET /products/{id}`
     * That call in the BE would hydrate the basic product information with the potential available and not-available parts (stock since we don’t want to show the parts that are not compatible with this bike)  
@@ -228,4 +230,4 @@ POST /admin/parts \- Manage part inventory
 * Add discount codes and promotions.  
 * Enhance search and filtering for products.  
 * Introduce AI-based recommendations.
-
+* Create your bike feature ![](https://github.com/user-attachments/assets/679f6fef-e13f-4b24-a4c2-c12c6027e79b)
